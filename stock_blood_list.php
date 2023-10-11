@@ -1,3 +1,6 @@
+<?php
+require_once "connect.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,35 +37,96 @@
                                
                             </thead>
 
+                            <?php
+                            global $ap, $an, $bp, $bn, $op, $on, $abp, $abn;
+                            $ap = 0;
+                            $an = 0;
+                            $bp = 0;
+                            $bn = 0;
+                            $op = 0;
+                            $on = 0;
+                            $abp = 0;
+                            $abn = 0;
+                            
+                            $select_query = "SELECT * FROM `blood_doner`" ;
+                            $result_query = mysqli_query($con, $select_query);
+                            if(mysqli_num_rows($result_query) > 0){
+                                while($row = mysqli_fetch_assoc($result_query)){
+                                 $blood_group = $row['blood_group'];
 
-                            
-                            <tbody>
-                                <tr>
-                                    <td>A+</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>A-</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>B+</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>B-</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>AB+</td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>AB-</td>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                            
+                                 switch ($blood_group) {
+                                   case "A+":
+                                    $ap++;
+                                     break;
+                                   
+                                   case "A-":
+                                    $an++;
+                                     break;
+                                   
+                                   case "B+":
+                                    $bp++;
+                                     break;
+                                   
+                                   case "B-":
+                                    $bn++;
+                                     break;
+                                   
+                                   case "O+":
+                                    $op++;
+                                     break;
+                                   
+                                   case "O-":
+                                    $on++;
+                                     break;
+                                   
+                                   case "AB+":
+                                    $abp++;
+                                     break;
+                                   
+                                   case "AB-":
+                                    $abn++;
+                                     break;
+                                   
+                                 
+                                 }
+                               }
+                            echo " <tbody>
+                                  <tr>
+                                      <td>A+</td>
+                                      <td>$ap</td>
+                                  </tr>
+                                  <tr>
+                                      <td>A-</td>
+                                      <td>$an</td>
+                                  </tr>
+                                  <tr>
+                                      <td>B+</td>
+                                      <td>$bp</td>
+                                  </tr>
+                                  <tr>
+                                      <td>B-</td>
+                                      <td>$bn</td>
+                                  </tr>
+                                  <tr>
+                                      <td>O+</td>
+                                      <td>$op</td>
+                                  </tr>
+                                  <tr>
+                                      <td>O-</td>
+                                      <td>$on</td>
+                                  </tr>
+                                  <tr>
+                                      <td>AB+</td>
+                                      <td>$abp</td>
+                                  </tr>
+                                  <tr>
+                                      <td>AB-</td>
+                                      <td>$abn</td>
+                                  </tr>
+                              </tbody> ";
+                              
+                            }
+                          ?>
                         </table>
                           
                         </div>
